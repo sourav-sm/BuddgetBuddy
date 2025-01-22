@@ -6,6 +6,8 @@ import {
   UserButton
 } from '@clerk/nextjs'
 import './globals.css'
+import { Toaster } from "@/components/ui/sonner"
+
 export default function RootLayout({
   children,
 }: {
@@ -15,13 +17,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body>
-          {/* <SignedOut>
-            <SignInButton />
-          </SignedOut>
-          <SignedIn>
-            <UserButton /> 
-            {/* remove it for  extra img 
-          </SignedIn> */}
+        <Toaster />
           {children}
         </body>
       </html>

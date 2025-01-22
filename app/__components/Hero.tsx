@@ -4,7 +4,7 @@ import dashboard from '../../public/dashboard.jpg'
 
 function Hero() {
   return (
-    <section className="bg-gray-50 flex items-center flex-col">
+    <section className="bg-gray-100 flex items-center flex-col">
   <div className="mx-auto max-w-screen-xl px-4 py-10 sm:py-32 lg:flex">
     <div className="mx-auto max-w-xl text-center">
       <h1 className="text-3xl font-extrabold sm:text-5xl">
