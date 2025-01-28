@@ -24,48 +24,20 @@ function ExpenseListTable({expenseList,refreshData}) {
         refreshData();
       }
   }
-
-  //wrong one---------------------------
-//   return (
-//     <div className='mt-3'>
-//       {/* <div className='grid grid-cols-4 bg-slate-200 p-2'>  */}
-//       <div className='flex  justify-around bg-slate-200 p-2'>
-//         <h2>Name</h2>
-//         <h2>Amount</h2>
-//         <h2>Date</h2>
-//         <h2>Action</h2>
-//       </div>
-//       {expenseList.map((expense,index)=>{
-//         // <div key={index} className='grid grid-cols-4 bg-slate-200 p-2'> 
-//         <div key={index} className='flex  justify-around bg-slate-200 p-2'>
-//         <h2>{expense.name}</h2>
-//         <h2>{expense.amount}</h2>
-//         <h2>{expense.createdAt}</h2>
-//         <h2>
-//           <Trash className='bg-red-600'/>
-//         </h2>
-//       </div>
-//       })}
-//     </div>
-//   )
-// }
-//
-// export default ExpenseListTable;
-
-//corect one-------------------------------------------
+  
 return (
   <div className="mt-3">
-    {/* <div className="grid grid-cols-4 bg-slate-300 p-3 font-semibold text-gray-700">
-     */}
-     <div className='flex justify-around'>
+    <div className="grid grid-cols-4 bg-slate-300 p-3 font-semibold text-gray-700">
+    
+     {/* <div className='flex justify-around'> */}
       <h2 className='font-bold'>Name</h2>
       <h2 className='font-bold'>Amount</h2>
       <h2 className='font-bold'>Created At</h2>
       <h2 className='font-bold'>Action</h2>
      </div>
     {expenseList.map((expense, index) => (
-      // <div key={index} className="grid grid-cols-4 bg-slate-200 p-2">
-      <div key={index} className='flex  justify-around bg-slate-200 p-2'>
+      <div key={index} className="grid grid-cols-4 bg-slate-200 p-2">
+      {/*  <div key={index} className='flex  justify-around bg-slate-200 p-2'> */}
         <h2>{expense.name}</h2>
         <h2>{expense.amount}</h2>
         <h2>{expense.createdAt}</h2>

@@ -94,7 +94,7 @@ const Expenses = () => {
             
          </span>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 mt-6 gap-5">
+      {/* <div className="grid grid-cols-1 md:grid-cols-2 mt-6 gap-5">
         {budgetInfo?<BudgetItem budget={budgetInfo}/>
         :<div className="h-[150px] w-full bg-slate-200 rounded-lg animate-pulse">
         </div>}
@@ -102,7 +102,7 @@ const Expenses = () => {
           user={user}
           refreshData={()=>getBudgetInfo()}
           />
-      </div>
+      </div> */}
       <div className="mt-4">
         <h2 className="font-bold text-xl">Latest Expense</h2>
         <ExpenseListTable expenseList={expenseList}

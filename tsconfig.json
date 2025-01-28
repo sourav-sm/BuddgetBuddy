@@ -33,7 +33,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-  ],
+, "app/(routes)/dashboard/_components/CardInfo.jsx"  ],
   "exclude": [
     "node_modules"
   ]
