@@ -1,31 +1,62 @@
-// import React from 'react'
-// import CreateBudget from "./CreateBudget"
-
-// function BudgetList() {
-//   return (
-//     <div className='mt-9 bg-red-500'>
-//         <div className='grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
-//            <CreateBudget />
-//            <div className='bg-red-400'>yuhvhjjh j j</div>
-//         </div>
-        
-//     </div>
-//   )
-// }
-
-// export default BudgetList;
-
-import React from 'react';
+"use client";
+import React, { useEffect, useState } from 'react';
 import CreateBudget from './CreateBudget';
+import { db } from '@/utils/dbConfig';
+import { eq,getTableColumns, sql,desc } from 'drizzle-orm';
+import { Budget,Expense } from '@/utils/schema';
+import { useUser } from '@clerk/nextjs';
+import BudgetItem from './BudgetItem';
+
 
 function BudgetList() {
+  const {user}=useUser();
+  const [budgetList,setBudgetList]=useState([]);
+  
+  useEffect(()=>{
+    user&&getBudgetList();
+  },[user])
+
+
+  //for getting the budget list
+  const getBudgetList=async()=>{
+     const result=await db.select({
+        ...getTableColumns(Budget),
+        totalSpend:sql `sum(${Expense.amount})`.mapWith(Number),
+        totalItems:sql `count(${Expense.id})`.mapWith(Number)
+     }).from(Budget)
+     .leftJoin(Expense,eq(Budget.id,Expense.budgetId))
+     .where(eq(Budget.createdBy,user?.primaryEmailAddress)?.emailAddress)
+     .groupBy(Budget.id)
+     .orderBy(desc(Budget.id));
+
+     setBudgetList(result)
+  }
+  
+  
   return (
-    <div className="mt-9 bg-red-500 p-5">
-      <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <CreateBudget />
-        <div className="bg-red-400 p-5 rounded-md shadow-md">
-          <p className="text-white text-lg">Sample Budget Item</p>
+    <div className="mt-9 bg-gray-100 p-5 rounded-lg shadow-md">
+      <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* <div className="mt-9 bg-gray-100 p-5 rounded-lg shadow-md">
+      <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"> */}
+        <CreateBudget 
+          refreshData={getBudgetList}
+        />
+        {budgetList?.length>0?budgetList.map((budget,index)=>(
+          <BudgetItem key={index} budget={budget} />
+        ))
+       :[1,2,3,4,5,6].map((item,index)=>(
+        <div key={index} className='w-full bg-slate-200 rounded-lg h-[150px] animate-pulse'>
+
         </div>
+       ))
+      //  <div className="flex flex-col space-y-3">
+      //   <Skeleton className="h-[125px] w-[250px] rounded-xl" />
+      //   <div className="space-y-2">
+      //     <Skeleton className="h-4 w-[250px]" />
+      //     <Skeleton className="h-4 w-[200px]" />
+      //   </div>
+      // </div>
+      }
       </div>
     </div>
   );

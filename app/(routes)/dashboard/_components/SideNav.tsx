@@ -32,7 +32,7 @@ function SideNav() {
       id: 3,
       name: 'Expenses',
       icon: ReceiptText,
-      path: '/dashboard/expenses'
+      path: `/dashboard/expenses/2`
     },
     {
       id: 4,

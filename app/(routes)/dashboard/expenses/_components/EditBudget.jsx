@@ -1,6 +1,7 @@
-"use client";
-
+"use client"
 import React, { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { PenBox } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -10,53 +11,49 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-
 import EmojiPicker from "emoji-picker-react";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { db } from "@/utils/dbConfig";
 import { Budget } from "@/utils/schema";
 import { useUser } from "@clerk/nextjs";
 import { toast } from "sonner"
 import { DialogClose } from "@radix-ui/react-dialog";
+import { eq } from "drizzle-orm";
 
 
-function CreateBudget({refreshData}) {
-  const [emojiIcon, setEmojiIcon] = useState("😀");
-  const [openEmojiPicker, setOpenEmojiPicker] = useState(false);
-  const [budgetName, setBudgetName] = useState(""); 
-  const [budgetAmount, setBudgetAmount] = useState(""); 
-  const {user}=useUser();
+function EditBudget({budgetInfo}) {
+    const [emojiIcon, setEmojiIcon] = useState([budgetInfo.icon]);
+    const [openEmojiPicker, setOpenEmojiPicker] = useState(false);
+    const [budgetName, setBudgetName] = useState(budgetInfo.name); 
+    const [budgetAmount, setBudgetAmount] = useState(budgetInfo.amount); 
+    const {user}=useUser();
 
-  const CreateBudget=async()=>{
-     const result=await db.insert(Budget)
-     .values({
-         name:budgetName,
-         amount:budgetAmount,
-         createdBy:user?.primaryEmailAddress?.emailAddress,
-         icon:emojiIcon 
-     }).returning({insertId:Budget.id})
+    const onUpdateBudget=async()=>{
+      const result=await db.update(Budget).set({
+        name:budgetName,
+        amount:budgetAmount,
+        icon:emojiIcon
+      }).where(eq(Budget.id,budgetInfo.id))
+      .returning();
+      
+      if(result){
+        toast('Budget is Updated Successfully!')
+      }
 
-     if(result){
-      refreshData();
-      toast("New Budget Created Successfully!")
-     }
-  }
-
-
+    }
 
   return (
     <div>
-      <Dialog>
-        <DialogTrigger>
-          <div className="bg-slate-100 p-10 rounded-md flex flex-col items-center border-2 border-dashed cursor-pointer hover:shadow-md mt-5">
-            <h2>+</h2>
-            <h2>Create a new Budget</h2>
-          </div>
+        
+        <Dialog>
+        <DialogTrigger asChild>
+           <Button className="flex gap-2"> 
+               <PenBox/> Edit
+           </Button>
         </DialogTrigger>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Create a new Budget</DialogTitle>
+            <DialogTitle>Update Budget</DialogTitle>
             <DialogDescription>
               <div>
                 <Button
@@ -82,13 +79,15 @@ function CreateBudget({refreshData}) {
                   <h2 className="text-black font-medium">Budget Name</h2>
                   <Input 
                     placeholder="e.g., Home Decor" 
+                    defaultValue={budgetInfo.name}
                     onChange={(e)=>setBudgetName(e.target.value)}
                   />
                 </div>
                 <div className="mt-2">
                   <h2 className="text-black font-medium my-1">Budget Amount</h2>
                   <Input 
-                    placeholder="e.g., 5000$" 
+                    placeholder="e.g., 5000$"
+                    defaultValue={budgetInfo.amount} 
                     type="number"
                     onChange={(e)=>setBudgetAmount(e.target.value)} 
                     />
@@ -101,17 +100,16 @@ function CreateBudget({refreshData}) {
             <DialogClose asChild>
             <Button className="mt-5 w-full"
                    disabled={!(budgetName&&budgetAmount)}//disable button if budgetName and budgetAmount is empty
-                   onClick={()=>CreateBudget()}//call create budget function
+                   onClick={()=>onUpdateBudget()}//call create budget function
                 >
-                    Create Buddget
+                    Update Buddget
                 </Button>
             </DialogClose>
           </DialogFooter>
         </DialogContent>
       </Dialog>
     </div>
-  );
+  )
 }
 
-export default CreateBudget;
-
+export default EditBudget;
