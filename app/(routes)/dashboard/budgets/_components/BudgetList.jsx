@@ -36,8 +36,6 @@ function BudgetList() {
   return (
     <div className="mt-9 bg-gray-100 p-5 rounded-lg shadow-md">
       <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {/* <div className="mt-9 bg-gray-100 p-5 rounded-lg shadow-md">
-      <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"> */}
         <CreateBudget 
           refreshData={getBudgetList}
         />

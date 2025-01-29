@@ -9,34 +9,35 @@ function BudgetItem({budget}) {
       }
 
     const calculateProgress=()=>{
-        // const perc=(budget.totalSpend/budget.amount)*100;
-        const perc=(budget.totalSpend/budget.amount);//no need to convert it into percentage
+        const perc=(budget.totalSpend/budget.amount)*100;
         return perc.toFixed(2);
     }  
       
   return (
-    <Link href={`/dashboard/expenses/${budget.id}`} className='p-10 border rounded-lg hover:shadow-md cursor-pointer h-[170px]'>
-        <div className='flex gap-4 items-center justify-between'>
-        <div className='flex gap-4 items-center'>
-            <h2 className='text-2xl p-3 px-4 bg-slate-100 rounded-full'>{budget?.icon}</h2>
-            <div>
-                <h2 className='font-bold text-lg'>{budget.name}</h2>
-                <h2 className='text-sm text-gray-500'>{budget.totalItems} Item</h2>
-            </div>
-        </div>
-
-        <h2 className='font-bold text-green-600 text-lg' >${budget.amount}</h2>
-        
-        </div>
-        
-        {/* progressive view */}
-        <div className='mt-5'>
-            <div className='flex items-center justify-between mb-3'>
-                <h2 className='text-xs text-slate-400'>{budget.totalSpend?budget.totalSpend:0} Spend</h2>
-                <h2 className='text-xs text-slate-400'>{budget.amount-budget.totalSpend} Remaining</h2>
-            </div>
-            <Progress value={calculateProgress()} />
-
+    <Link href={`/dashboard/expenses/${budget.id}`}>
+        <div className='p-10 border rounded-lg hover:shadow-md cursor-pointer h-[170px]'>
+           <div className='flex gap-4 items-center justify-between'>
+           <div className='flex gap-4 items-center'>
+               <h2 className='text-2xl p-3 px-4 bg-slate-100 rounded-full'>{budget?.icon}</h2>
+               <div>
+                   <h2 className='font-bold text-lg'>{budget.name}</h2>
+                   <h2 className='text-sm text-gray-500'>{budget.totalItems} Item</h2>
+               </div>
+           </div>
+   
+           <h2 className='font-bold text-green-600 text-lg' >${budget.amount}</h2>
+           
+           </div>
+           
+           {/* progressive view */}
+           <div className='mt-5'>
+               <div className='flex items-center justify-between mb-3'>
+                   <h2 className='text-xs text-slate-700'>{budget.totalSpend?budget.totalSpend:0} Spend</h2>
+                   <h2 className='text-xs text-slate-700'>{budget.amount-budget.totalSpend} Remaining</h2>
+               </div>
+               <Progress className='bg-slate-200' value={calculateProgress()} />
+   
+           </div>
         </div>
     </Link>
   )

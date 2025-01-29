@@ -12,6 +12,7 @@ import { useParams, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Trash } from "lucide-react";
 import { toast } from "sonner";
+import { ArrowLeft } from "lucide-react";
 import EditBudget from '../_components/EditBudget'
 
 const Expenses = () => {
@@ -83,7 +84,9 @@ const Expenses = () => {
   return (
     <div className="p-10">
       <div className="flex justify-between">
-         <h2 className="text-2xl font-bold flex justify-between">My Expenses</h2>
+         <h2 className="text-2xl font-bold flex justify-between gap-2 items-center"><ArrowLeft
+         className="hover:cursor-pointer" onClick={()=>route.back()}
+         />  My Expenses</h2>
          <span>
           <div className="flex gap-2">
             {/* <EditBudget budgetInfo={budgetInfo} refreshData={getBudgetInfo()}  /> */}
@@ -94,7 +97,7 @@ const Expenses = () => {
             
          </span>
       </div>
-      {/* <div className="grid grid-cols-1 md:grid-cols-2 mt-6 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 mt-6 gap-5">
         {budgetInfo?<BudgetItem budget={budgetInfo}/>
         :<div className="h-[150px] w-full bg-slate-200 rounded-lg animate-pulse">
         </div>}
@@ -102,7 +105,7 @@ const Expenses = () => {
           user={user}
           refreshData={()=>getBudgetInfo()}
           />
-      </div> */}
+      </div>
       <div className="mt-4">
         <h2 className="font-bold text-xl">Latest Expense</h2>
         <ExpenseListTable expenseList={expenseList}

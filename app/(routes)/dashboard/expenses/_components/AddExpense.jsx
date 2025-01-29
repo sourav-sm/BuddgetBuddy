@@ -19,7 +19,10 @@ function AddExpense({budgetID,user,refreshData}) {
         //  createdAt:moment().format('DD/MM/YYY')
         createdAt:moment().format('DD/MM/YYYY')
       }).returning({insertId:Budget.id})
-      console.log(result);
+      
+      setExpenseName('');
+      setExpenseAmount('');
+
       if(result){
         refreshData();
         toast("New Expense Added Successfully!")
@@ -33,6 +36,7 @@ function AddExpense({budgetID,user,refreshData}) {
             <h2 className="text-black font-medium">Expense Name</h2>
             <Input 
               placeholder="e.g., Home Decor" 
+              value={ExpenseName}
               onChange={(e)=>setExpenseName(e.target.value)}
             />
             </div>
@@ -41,6 +45,7 @@ function AddExpense({budgetID,user,refreshData}) {
               <Input 
                 placeholder="e.g., 5000$" 
                 type="number"
+                value={ExpenseAmount}
                 onChange={(e)=>setExpenseAmount(e.target.value)} 
                 />
             </div>
