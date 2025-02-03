@@ -2,7 +2,8 @@
 
 import React, { useEffect } from 'react'
 import Image from 'next/image'
-import logo from '../../../../../BuddgetBuddy/public/logo.svg'
+// import logo from '../../../../../BuddgetBuddy/public/logo.svg'
+import logo from '../../../../public/logo.svg'
 import { LayoutGrid, PiggyBank, ReceiptText, ShieldCheck } from 'lucide-react'
 import { UserButton } from '@clerk/nextjs'
 import Link from 'next/link'

@@ -26,7 +26,6 @@ function Header() {
          alt="logo" />
          {/* BudgetBuddy */}
         
-      }
          {isSignedIn?
          <UserButton/>:
          <Link href={"/sign-in"}>
