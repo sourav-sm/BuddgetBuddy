@@ -28,7 +28,7 @@ export default function Dashboard() {
           totalItems:sql `count(${Expense.id})`.mapWith(Number)
        }).from(Budget)
        .leftJoin(Expense,eq(Budget.id,Expense.budgetId))
-       .where(eq(Budget.createdBy,user?.primaryEmailAddress)?.emailAddress)
+       .where(eq(Budget.createdBy,user?.primaryEmailAddress?.emailAddress))
        .groupBy(Budget.id)
        .orderBy(desc(Budget.id));
   

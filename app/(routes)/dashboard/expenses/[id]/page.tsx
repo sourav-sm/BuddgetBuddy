@@ -46,7 +46,8 @@ const Expenses = () => {
         .groupBy(Budget.id);
         
         setBudgetInfo(result[0]);
-        console.log("budget info ----",result);
+        console.log("budget info ----",result[0]);
+        console.log("budget info 2 is ----",result[0]);
         getExpenseList();
     } catch (error) {
       console.error("Error fetching budget info:", error);
