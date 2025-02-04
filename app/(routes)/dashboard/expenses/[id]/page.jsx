@@ -17,6 +17,7 @@ import EditBudget from '../_components/EditBudget'
 
 const Expenses = () => {
   const params = useParams();
+  console.log("params is---",params);
   const { user } = useUser();
   const [budgetInfo, setBudgetInfo] = useState([]);
   const [expenseList,setExpenseList]=useState([]);
@@ -29,21 +30,20 @@ const Expenses = () => {
   // }, [user,params]);
   useEffect(() => {
       user&&getBudgetInfo();
-    }, [user]);
+    }, [user,params]);
 
   const getBudgetInfo = async () => {
     try {
-      const result = await db
-        .select({
+      const result = await db .select({
           ...getTableColumns(Budget),
           totalSpent: sql`sum(${Expense.amount})`.mapWith(Number),
           totalItems: sql`count(${Expense.id})`.mapWith(Number),
         })
         .from(Budget)
         .leftJoin(Expense, eq(Budget.id, Expense.budgetId))
-        .where(eq(Budget.createdBy, user?.primaryEmailAddress?.emailAddress))
-        .where(eq(Budget.id, params.id))
-        .groupBy(Budget.id);
+        .where(eq(Budget.createdBy,user?.primaryEmailAddress?.emailAddress))
+        .where(eq(Budget.id,params.id))
+        .groupBy(Budget.id)
         
         setBudgetInfo(result[0]);
         console.log("budget info ----",result[0]);
@@ -90,7 +90,7 @@ const Expenses = () => {
          />  My Expenses</h2>
          <span>
           <div className="flex gap-2">
-            {/* <EditBudget budgetInfo={budgetInfo} refreshData={getBudgetInfo()}  /> */}
+            <EditBudget budgetInfo={budgetInfo} refreshData={getBudgetInfo()}  />
             <Button className="flex gap-2" variant="destructive" onClick={()=>deleteBudget()}> 
               <Trash/>Delete Budget
             </Button>
@@ -118,3 +118,7 @@ const Expenses = () => {
 };
 
 export default Expenses;
+
+
+
+
