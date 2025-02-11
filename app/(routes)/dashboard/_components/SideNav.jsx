@@ -45,10 +45,11 @@ function SideNav() {
 
   return (
     <div className='h-screen p-5 border shadow-sm'>
-      <Image width={160}
+      {/* <Image width={160}
         height={100}
         src={logo} 
-        alt="logo" />
+        alt="logo" /> */}
+      <span className="text-xl font-bold text-blue-900">BudgetBuddy</span>
       <div className='mt-2'>
         {menuList.map((menu) => (
           <Link href={menu.path} key={menu.id}>

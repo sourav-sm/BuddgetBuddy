@@ -33,7 +33,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-, "app/(routes)/dashboard/_components/CardInfo.jsx", "app/(routes)/dashboard/layout.jsx", "app/(routes)/dashboard/page.jsx", "app/(routes)/dashboard/_components/SideNav.jsx", "app/(routes)/dashboard/expenses/[id]/page.jsx"  ],
+, "app/(routes)/dashboard/_components/CardInfo.jsx", "app/(routes)/dashboard/layout.jsx", "app/(routes)/dashboard/page.jsx", "app/(routes)/dashboard/_components/SideNav.jsx", "app/(routes)/dashboard/expenses/[id]/page.jsx", "app/(routes)/dashboard/budgets/page.jsx"  ],
   "exclude": [
     "node_modules"
   ]

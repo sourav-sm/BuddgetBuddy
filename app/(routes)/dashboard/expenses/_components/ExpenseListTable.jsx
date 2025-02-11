@@ -24,20 +24,19 @@ function ExpenseListTable({expenseList,refreshData}) {
         refreshData();
       }
   }
-  
+
 return (
   <div className="mt-3">
-    <div className="grid grid-cols-4 bg-slate-300 p-3 font-semibold text-gray-700">
+    <div className="grid grid-cols-4 bg-slate-300 p-3 font-semibold text-gray-700 text-xs md:text-base">
     
-     {/* <div className='flex justify-around'> */}
       <h2 className='font-bold'>Name</h2>
       <h2 className='font-bold'>Amount</h2>
       <h2 className='font-bold'>Created At</h2>
       <h2 className='font-bold'>Action</h2>
      </div>
     {expenseList.map((expense, index) => (
-      <div key={index} className="grid grid-cols-4 bg-slate-200 p-2">
-      {/*  <div key={index} className='flex  justify-around bg-slate-200 p-2'> */}
+      <div key={index} className="grid grid-cols-4 bg-slate-200 p-2 text-xs md:text-base gap-3">
+
         <h2>{expense.name}</h2>
         <h2>{expense.amount}</h2>
         <h2>{expense.createdAt}</h2>

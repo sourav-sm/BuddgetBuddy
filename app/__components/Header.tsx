@@ -20,10 +20,11 @@ function Header() {
 
   return (
     <div className='flex justify-between p-5 items-center border shadow-md'>
-        <Image width={160}
+        {/* <Image width={160}
         height={100}
          src={logo} 
-         alt="logo" />
+         alt="logo" /> */}
+         <span className="text-xl font-bold text-blue-900">BudgetBuddy</span>
          {/* BudgetBuddy */}
         
          {isSignedIn?
