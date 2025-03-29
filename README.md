@@ -74,7 +74,14 @@ BudgetBuddy is a full-stack platform built with Next.js that helps users manage 
   Create a `.env` file in the root directory and add the following:
 
      `
-     
+     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=Your Private Key
+    CLERK_SECRET_KEY=Your Secret Key
+
+    NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+    NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+
+    NEXT_PUBLIC_DATABASE_URL=postgresql://<your-username>:<your-password>@ep-royal-bread-48297123.us-east-2.aws.neon.tech/Expense-Tracker?sslmode=require
+
      `
 
     
